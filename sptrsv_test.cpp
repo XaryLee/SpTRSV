@@ -27,6 +27,11 @@ int main() {
         }
         cout << '\n';
     }
+    cout << "Vector b:\n";
+    for (auto each : b) {
+        cout << each << ' ';
+    }
+    cout << '\n';
     cout << "The solution is:\n";
     for (double xi : x) {
         cout << xi << ' ';
