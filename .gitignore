@@ -1,0 +1,67 @@
+# Executable files
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Object files
+*.o
+*.obj
+
+# Archive files
+*.lib
+*.a
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Backup files
+*~
+*.bak
+*.tmp
+
+# Other files to ignore
+*.log
+*.out
+*.pid
+
+# IDEs and editors
+.vs/
+*.vcxproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.sublime-workspace
+*.sublime-project
+*.idea/
+*.project
+*.classpath
+*.cproject
+*.settings/
+.vscode
+.vscode/*
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Build directory
+/build/
+
+# Other files
+backup.cpp
+tri_solve.cpp
