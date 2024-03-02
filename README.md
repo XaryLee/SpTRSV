@@ -1,5 +1,14 @@
 # SpTRSV
 
+## 数据预处理
+
+从 [SuiteSparse](https://sparse.tamu.edu/) 上下载`.mtx`格式的稀疏方阵，运行`data_process.py`获取这些方阵的下三角部分，并填充对角线上的零元素，保证矩阵非奇异，从而保证矩阵有解。
+
+```bash
+cd data_processing
+python data_process.py
+```
+
 ## 后向替代算法
 
 ### 文件
