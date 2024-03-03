@@ -9,6 +9,8 @@ cd data_processing
 python data_process.py
 ```
 
+`src`目录下的`mtx`源文件存储格式不确定，可能是逐行给出也可能是逐列给出。为了方便C++读取，python均使用`scipy.sparse.csr_matrix`对矩阵进行转换，再进行数据处理，并存储为`mtx`，以此保证存储格式的统一。
+
 ## 后向替代算法
 
 ### 文件
