@@ -13,7 +13,7 @@ int main() {
     //     {0, 2, 4, 6, 8, 9}                // row_pointers
     // };
 
-    string mtx_path = "matrices/triangular/bcspwr01_L.mtx";
+    string mtx_path = "matrices/triangular/chipcool0_L.mtx";
     // vector<double> b = {8, 18, 14, 34, 40};
 
     SparseTriangular sptri(mtx_path);
@@ -25,22 +25,31 @@ int main() {
     // 输出解
     // cout << "This is sptrsv_test\n";
     // auto dense_matrix = sptri.csrToDense();
-    cout << "Sparse Triangular Matrix:\n";
+    // cout << "Sparse Triangular Matrix:\n";
+    // sptri.print();
+    // for (auto i = 0; i < 100; i++)
+    //     cout << sptri.col_indices[i] << ' ';
     // for (auto each : dense_matrix) {
     //     for (auto value: each) {
     //         cout << value << ' ';
     //     }
     //     cout << '\n';
     // }
-    sptri.printDense();
-    cout << "Vector b:\n";
-    for (auto each : b) {
-        cout << each << ' ';
-    }
-    cout << '\n';
+    // sptri.printDense();
+    // cout << "Vector b:\n";
+    // for (auto each : b) {
+    //     cout << each << ' ';
+    // }
+    // cout << '\n';
     cout << "The solution is:\n";
-    for (double xi : x) {
-        cout << xi << ' ';
+    // cout << x.size() << endl;
+    // for (int i = 0; i < 20082; i++) {
+    //     cout << x[i]<< ' ';
+    // }
+    // cout << endl;
+
+    for (double xi: x) {
+        cout << xi<< ' ';
     }
     cout << endl;
 

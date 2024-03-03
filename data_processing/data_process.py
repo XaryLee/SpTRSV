@@ -8,9 +8,6 @@ def get_lower_triangular(mat):
     if not isinstance(mat, csr_matrix):
         raise ValueError("Input must be a CSR format sparse matrix.")
     
-    # 获取下三角部分（包括对角线）
-    lower_triangular = tril(mat)
-    
     rows, cols = mat.shape
     mat_min = mat.data.min() if mat.nnz > 0 else 0
     mat_max = mat.data.max() if mat.nnz > 0 else 0
@@ -19,11 +16,27 @@ def get_lower_triangular(mat):
             random_value = np.random.randint(mat_min, mat_max + 1)
             mat[i, i] = random_value
     
+    # 缩放矩阵元素值
+    # if mat_min != mat_max:
+    #     mat /= (mat_max - mat_min)
+    
+    # 获取下三角部分（包括对角线）
+    lower_triangular = tril(mat)
+    
+    # 缩放矩阵元素
+    # min_value = lower_triangular.data.min()
+    # max_value = lower_triangular.data.max()
+    # if min_value != max_value:
+    #     lower_triangular /= (max_value - min_value)
+    
+    # 只测试矩阵非零元分布的影响, 元素值暂且不管
+    lower_triangular.data = np.ones_like(lower_triangular.data, dtype=np.float64)
+    
     return lower_triangular
 
 # 指定路径
-path = "../../matrices/src"
-output_path = "../../matrices/triangular"
+path = "../matrices/src"
+output_path = "../matrices/triangular"
 # 确保输出路径存在
 if not os.path.exists(output_path):
     os.makedirs(output_path)
