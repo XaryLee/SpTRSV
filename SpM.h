@@ -175,6 +175,7 @@ public:
     using CSRMatrix::CSRMatrix;
     vector<double> backwardSubstitution(const vector<double>&);
     vector<double> forwardSubstitution(const vector<double>& b);
+    vector<double> forwardSubstitution_cache(const vector<double>& b);
 };
 
 vector<double> SparseTriangular::backwardSubstitution(const vector<double>& b) {
@@ -200,6 +201,30 @@ vector<double> SparseTriangular::backwardSubstitution(const vector<double>& b) {
 }
 
 vector<double> SparseTriangular::forwardSubstitution(const vector<double>& b) {
+    int n = b.size();
+    vector<double> x(n, 0.0);  // 初始化解向量x，大小为n，并填充为0
+
+    for (int i = 0; i < n; ++i) {
+        double sum = 0.0;
+        for (int j = row_pointers[i]; j < row_pointers[i + 1]; ++j) {
+            if (col_indices[j] <= i) {
+                sum += values[j] * x[col_indices[j]];
+            }
+        }
+        // 对角线元素不应为0
+        double current_value = values[row_pointers[i]]; // 在下三角矩阵中，对角线元素是每行第一个元素
+        if (current_value == 0) {
+            cerr << "Error: Variable is zero. Exiting program." << endl;
+            exit(EXIT_FAILURE); // 使用非零值退出表示程序出错
+        }
+        x[i] = (b[i] - sum) / current_value;
+    }
+
+    return x;
+}
+
+vector<double> SparseTriangular::forwardSubstitution_cache(const vector<double>& b) {
+    // cache友好的前向替代算法, 对索引取模保证命中
     int n = b.size();
     vector<double> x(n, 0.0);  // 初始化解向量x，大小为n，并填充为0
 

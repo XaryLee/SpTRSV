@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <chrono>
 
 #include "SpM.h"
 
@@ -20,7 +21,11 @@ int main() {
     vector<double> b(sptri.cols, 1.0);
 
     // 计算解
+    auto start = chrono::high_resolution_clock::now();
     vector<double> x = sptri.forwardSubstitution(b);
+    auto finish = chrono::high_resolution_clock::now();
+    chrono::duration<double> elapsed = finish - start;
+    cout << "Elapsed time: " << elapsed.count() << " seconds" << endl;
 
     // 输出解
     // cout << "This is sptrsv_test\n";
@@ -41,17 +46,17 @@ int main() {
     //     cout << each << ' ';
     // }
     // cout << '\n';
-    cout << "The solution is:\n";
+    // cout << "The solution is:\n";
     // cout << x.size() << endl;
     // for (int i = 0; i < 20082; i++) {
     //     cout << x[i]<< ' ';
     // }
     // cout << endl;
 
-    for (double xi: x) {
-        cout << xi<< ' ';
-    }
-    cout << endl;
+    // for (double xi: x) {
+    //     cout << xi<< ' ';
+    // }
+    // cout << endl;
 
     return 0;
 }
