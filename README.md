@@ -9,21 +9,31 @@ cd data_processing
 python data_process.py
 ```
 
+只处理一个指定矩阵可以使用`process_one.py`
+
+```bash
+cd data_processing
+python process_one.py your/mat/path.mtx -o output/file/path.mtx
+```
+
 `src`目录下的`mtx`源文件存储格式不确定，可能是逐行给出也可能是逐列给出。为了方便C++读取，python均使用`scipy.sparse.csr_matrix`对矩阵进行转换，再进行数据处理，并存储为`mtx`，以此保证存储格式的统一。
 
-## 后向替代算法
+## 求解算法
 
 ### 文件
-针对上三角稀疏矩阵编写了相应的类`SpM.h`，并在类中定义了类函数backwardSubstitution函数以求解SpTRSV。
+针对上三角稀疏矩阵编写了相应的类`SpM.h`，并在类中定义了类函数backwardSubstitution和forwardSubstitution函数以求解SpTRSV。
 
 算法并未经过任何优化，是最原始的后向替代算法。
 
 ### 运行
 可调用`sptrsv_test.cpp`测试求解算法。
 
+`sptrsv_array_test.cpp`是应用动态数组的版本。
+
 ```bash
-g++ sptrsv_test.cpp -o a.exe
-./a.exe
+g++ sptrsv_test.cpp -o a.out
+# g++ sptrsv_array_test.cpp -o a.out
+./a.out
 ```
 
 ### 实验
@@ -36,4 +46,4 @@ g++ sptrsv_test.cpp -o a.exe
 最大下标 = (512 * 1024字节) / 8字节/整数 = 65536
 ```
 
-数组元素从0开始计数，因此index的最大值为65535. 可以在访问时手动对65536取模，保证每次取值不会超过L2 Cache的范围。
+数组元素从0开始计数，因此index的最大值为65535. 可以在计算前手动对65536取模，保证每次取值不会超过L2 Cache的范围。以这种方式模拟优化间接访存后的性能，比较访存优化前后的性能差异。这部分内容已经在`sptrsv_test.cpp`和`sptrsv_array_test.cpp`程序中实现。
