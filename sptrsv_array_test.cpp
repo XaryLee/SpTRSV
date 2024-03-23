@@ -5,13 +5,17 @@
 
 #include "SpM.h"
 
-#define ITER_NUM 50
-#define WARM_UP_STEPS 10
+#define ITER_NUM 30
+#define WARM_UP_STEPS 5
 
 using namespace std;
 
-int main() {
-    string mtx_path = "matrices/triangular/wiki-Talk_U2L.mtx";
+int main(int argc, char *argv[]) {
+    // string mtx_path = "matrices/triangular/wiki-Talk_U2L.mtx";
+    // string mtx_path = "matrices/triangular/soc-LiveJournal1_U2L.mtx";
+    string mtx_path = argv[1];
+    cout << "Computing " << mtx_path << endl;
+    // string mtx_path = "matrices/triangular/webbase-1M_U2L.mtx";
     // string mtx_path = "matrices/triangular/web-Google_L.mtx";
     CSRMatrixArray st(mtx_path);
     int n = st.rows;

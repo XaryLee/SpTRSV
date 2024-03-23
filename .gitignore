@@ -68,3 +68,4 @@ tri_solve.cpp
 test.*
 __pycache__/
 *.mtx
+*.png
